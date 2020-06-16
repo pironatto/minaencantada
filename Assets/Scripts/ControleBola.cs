@@ -9,6 +9,7 @@ public class ControleBola : MonoBehaviour {
     public float Velocidade,VelocidadeInicial;
     public GameObject prefabExplosao;
     public GameObject[] Itens;
+
  
     // Start is called before the first frame update
     void Start()
@@ -39,12 +40,12 @@ public class ControleBola : MonoBehaviour {
 
                 
                 int IdItens = Random.Range(0,10);
-                if (IdItens <8)
+                if (IdItens < 2)
                 {
-                Instantiate(Itens[0],transform.position,transform.rotation); 
+               Instantiate(Itens[0],transform.position,transform.rotation); 
                 }
-                else {
-                Instantiate(Itens[1],transform.position,transform.rotation);
+                else if(IdItens >8){
+               Instantiate(Itens[1],transform.position,transform.rotation);
                 }
                 
             }
