@@ -238,7 +238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 55565563}
-  - component: {fileID: 55565566}
+  - component: {fileID: 55565564}
   m_Layer: 0
   m_Name: GameControler
   m_TagString: Untagged
@@ -260,7 +260,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &55565566
+--- !u!114 &55565564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,14 +269,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 55565562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39cad2875ab1c543a38b3e19d790d50, type: 3}
+  m_Script: {fileID: 11500000, guid: 73ae47131d2429d42b3b121df24f4910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabMina: {fileID: 4775848639940457696, guid: e55fbd3419bc2be45a743941f585cfa2,
-    type: 3}
-  prefabBola:
+  prefabs:
+  - {fileID: 4775848639940457696, guid: e55fbd3419bc2be45a743941f585cfa2, type: 3}
   - {fileID: 4021327233705996187, guid: dba4f85fd6dfa2941bea7506ff817229, type: 3}
   - {fileID: 2384294530323971040, guid: 74f40dd84859a1441931313b67feeb44, type: 3}
+  - {fileID: 5636767553993786861, guid: f46fb9c98f6728243811d834150b887c, type: 3}
+  - {fileID: 8599769697931466136, guid: 736b2e0f76d7c5e4e8672af92159dce0, type: 3}
   A: {fileID: 1455349670}
   B: {fileID: 175843538}
   C: {fileID: 460994346}
@@ -285,9 +286,11 @@ MonoBehaviour:
   F: {fileID: 222457633}
   G: {fileID: 194470185}
   H: {fileID: 193516919}
+  MinaAberta: 0
   tempoAberto: 5
-  intervaloSpawn: 3
+  intervaloSpawn: 1
   tempoSpawnBola: 1
+  isPicareta: 0
 --- !u!1 &175843537
 GameObject:
   m_ObjectHideFlags: 0

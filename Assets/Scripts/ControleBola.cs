@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class ControleBola : MonoBehaviour { 
 
+    private GameControle _gameControle;    
     private Vector2 lastFrameVelocidade;
     private Rigidbody2D bolaRb;
     public float Velocidade,VelocidadeInicial;
-    public GameObject prefabExplosao;
-    public GameObject[] Itens;
 
- 
+    public bool isBateu;
+  
     // Start is called before the first frame update
     void Start()
     {
+        _gameControle = FindObjectOfType(typeof(GameControle)) as GameControle;
         bolaRb = GetComponent<Rigidbody2D>();
         bolaRb.velocity = new Vector2(VelocidadeInicial,0);
+        isBateu = false;
     }
 
     // Update is called once per frame
     void Update()
     {
        lastFrameVelocidade = bolaRb.velocity;
+
+  
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,30 +34,21 @@ public class ControleBola : MonoBehaviour {
         {
             Bater(collision.contacts[0].normal);
         }
+        //PARA GERAR A EXPLOSAO AO ENCONTRAR OUTRA BOLA
         if (collision.gameObject.tag == "Bola")
         {
-
             if (GetInstanceID() < collision.gameObject.GetInstanceID())
             {
-               GameObject temp = Instantiate(prefabExplosao, transform.position, transform.rotation);
-                Destroy (temp,0.5f);
-
-                
-                int IdItens = Random.Range(0,10);
-                if (IdItens < 2)
-                {
-               Instantiate(Itens[0],transform.position,transform.rotation); 
-                }
-                else if(IdItens >8){
-               Instantiate(Itens[1],transform.position,transform.rotation);
-                }
-                
+              _gameControle.tempExplosao = Instantiate(_gameControle.prefabs[3], transform.position, transform.rotation);
+              _gameControle.StartCoroutine("SpawnPicareta");
             }
-           
-            Destroy(this.gameObject);                      
+            Destroy(this.gameObject);
+            
         }
 
     }
+
+
 
     void Bater(Vector2 colNormal)
     {
@@ -62,5 +57,8 @@ public class ControleBola : MonoBehaviour {
         bolaRb.velocity = dir * Mathf.Max(speed, Velocidade);
     }
 
+
+
+ 
 
 }

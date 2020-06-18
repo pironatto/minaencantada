@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 604898bd3c9526a42a992133d271aa5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -135,8 +135,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Velocidade: 5
   VelocidadeInicial: -5
-  prefabExplosao: {fileID: 5636767553993786861, guid: f46fb9c98f6728243811d834150b887c,
-    type: 3}
-  Itens:
-  - {fileID: 8599769697931466136, guid: 736b2e0f76d7c5e4e8672af92159dce0, type: 3}
-  - {fileID: 4235384202415542496, guid: 87c6ed55b64d0ef41997ae2b48e35580, type: 3}
+  isBateu: 0
