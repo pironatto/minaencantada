@@ -41,11 +41,17 @@ public class ControleBola : MonoBehaviour {
             {
               _gameControle.tempExplosao = Instantiate(_gameControle.prefabs[3], transform.position, transform.rotation);
               _gameControle.StartCoroutine("SpawnPicareta");
+                Destroy(_gameControle.tempExplosao, 0.5f);
             }
             Destroy(this.gameObject);
             
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
     }
 
 

@@ -10,6 +10,8 @@ public class moveObject : MonoBehaviour
     public float forca;
     public float forcaGiro;
     private GameControle _gameControle;
+    private bool isPiscar = false;
+
 
 
 
@@ -29,6 +31,7 @@ public class moveObject : MonoBehaviour
         float smooth = Time.deltaTime * forcaGiro;
         transform.Rotate(new Vector3(0, 0, 2) * smooth);
 
+        //PARA O OBJETO PARAR NO TOPO
         if (transform.position.y >= 4.5f)
         {
             forca = 0;
@@ -36,14 +39,31 @@ public class moveObject : MonoBehaviour
             transform.position = new Vector2(transform.position.x, 4.5f);
             transform.rotation = Quaternion.Euler(0, 0, 0);
             StartCoroutine("TempoPicareta");
+            
         }
+
     }
 
     IEnumerator TempoPicareta()
     {
+        //PARA PERMITIR QUE O OBJETO PISQUE CORRETAMENTE
         yield return new WaitForSeconds(5);
+        if (isPiscar == false)
+        {
+            StartCoroutine("Piscar");
+            isPiscar = true;
+        }
+        yield return new WaitForSeconds(3);
         _gameControle.isPicareta = false;
         Destroy(this.gameObject);
+    }
+
+
+    IEnumerator Piscar()
+    {
+        yield return new WaitForSeconds(0.3f);
+        gameObject.GetComponent<SpriteRenderer>().enabled = !gameObject.GetComponent<SpriteRenderer>().enabled;
+        StartCoroutine("Piscar");
     }
 
 

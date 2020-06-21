@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Plataforma
+  - Bola
+  - Escada
+  - Picareta
   layers:
   - Default
   - TransparentFX
@@ -14,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 
