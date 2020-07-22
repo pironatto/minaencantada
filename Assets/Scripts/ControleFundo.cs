@@ -16,6 +16,6 @@ public class ControleFundo : MonoBehaviour
     void Update()
     {
         float width = Camera.main.orthographicSize * Screen.width / Screen.height;
-        transform.localScale = new Vector3(width / 16, 0.5f, 0.5f);
+        transform.localScale = new Vector3(width / 6.2f, 1.45f, 1.45f);
     }
 }

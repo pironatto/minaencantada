@@ -10,7 +10,7 @@ public class GameControle : MonoBehaviour
     public GameObject[] prefabs;
 
     private Transform spawPosicao;
-    public Transform A, B, C, D, E, F, G, H;
+    public Transform A, B, C, D, E, F;
 
     internal GameObject tempMina, tempBola, tempExplosao,tempPicareta,tempEscada;
     private Animator minaAnimator;
@@ -62,12 +62,6 @@ public class GameControle : MonoBehaviour
                 break;
             case 5:
                 spawPosicao = F;
-                break;
-            case 6:
-                spawPosicao = G;
-                break;
-            case 7:
-                spawPosicao = H;
                 break;
 
         }
