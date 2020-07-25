@@ -118,26 +118,21 @@ public class GameControle : MonoBehaviour
         switch (_playerControle.objetoColisao)
         {
             case "plataforma":
-                posA = -3.4f;               
+                posA = -3.32f;               
                 break;
             case "plataforma1":
-                posA = -2.15f;               
+                posA = -1.82f;               
                 break;
             case "plataforma2":
-                posA = -0.9f;               
+                posA = -0.31f;               
                 break;
             case "plataforma3":
-                posA = 0.34f;                
+                posA = 1.17f;                
                 break;
             case "plataforma4":
-                posA = 1.58f;               
+                posA = 2.67f;               
                 break;
-            case "plataforma5":
-                posA = 2.79f;              
-                break;
-            case "plataforma6":
-                posA = 4f;               
-                break;
+
 
          }
 

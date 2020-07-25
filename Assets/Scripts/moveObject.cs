@@ -32,11 +32,11 @@ public class moveObject : MonoBehaviour
         transform.Rotate(new Vector3(0, 0, 2) * smooth);
 
         //PARA O OBJETO PARAR NO TOPO
-        if (transform.position.y >= 4.5f)
+        if (transform.position.y >= 3.5f)
         {
             forca = 0;
             forcaGiro = 0;
-            transform.position = new Vector2(transform.position.x, 4.5f);
+            transform.position = new Vector2(transform.position.x, 3.5f);
             transform.rotation = Quaternion.Euler(0, 0, 0);
             StartCoroutine("TempoPicareta");
             
