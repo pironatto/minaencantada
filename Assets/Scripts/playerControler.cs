@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerControler : MonoBehaviour
 {
     private Rigidbody2D RbPlayer;
     private SpriteRenderer SrPlayer;
     public Sprite[] Personagem;
-    public float velocidade,velocidadeY;
+    public float velocidade, velocidadeY;
     public float forcaPulo;
     public string objetoColisao;
     public Transform groundCheckR, groundCheckL;
@@ -23,20 +24,20 @@ public class playerControler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGround = Physics2D.OverlapArea(groundCheckL.position, groundCheckR.position,whatIsGround);
+        isGround = Physics2D.OverlapArea(groundCheckL.position, groundCheckR.position, whatIsGround);
     }
 
     // Update is called once per frame
     void Update()
     {
         float h = Input.GetAxis("Horizontal");
-    
-
-        RbPlayer.velocity = new Vector2(h * velocidade,RbPlayer.velocity.y);
 
 
+        RbPlayer.velocity = new Vector2(h * velocidade, RbPlayer.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && isGround ==true)
+
+
+        if (Input.GetButtonDown("Jump") && isGround == true)
         {
             RbPlayer.velocity = new Vector2(RbPlayer.velocity.x, 0);
             RbPlayer.AddForce(new Vector2(0, forcaPulo));
@@ -46,11 +47,11 @@ public class playerControler : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D col)
     {
-      
+
         if (col.gameObject.tag == "Escada")
         {
             float v = Input.GetAxis("Vertical");
-            RbPlayer.velocity = new Vector2(RbPlayer.velocity.x,v * velocidadeY);
+            RbPlayer.velocity = new Vector2(RbPlayer.velocity.x, v * velocidadeY);
         }
     }
 
@@ -70,9 +71,19 @@ public class playerControler : MonoBehaviour
         //MORTE DO PERSONAGEM
         if (col.gameObject.tag == "Bola")
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            StartCoroutine("RecarregaCena");
+
         }
-              
+
+    }
+
+
+    IEnumerator RecarregaCena()
+    {
+        yield return new WaitForSeconds(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
 }

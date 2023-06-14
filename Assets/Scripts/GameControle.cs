@@ -12,7 +12,7 @@ public class GameControle : MonoBehaviour
     private Transform spawPosicao;
     public Transform A, B, C, D, E, F;
 
-    internal GameObject tempMina, tempBola, tempExplosao,tempPicareta,tempEscada;
+    internal GameObject tempMina, tempBola, tempExplosao, tempPicareta, tempEscada;
     private Animator minaAnimator;
     private Animator escadaAnimator;
     public bool MinaAberta;
@@ -21,7 +21,7 @@ public class GameControle : MonoBehaviour
     public bool isPicareta;
 
     public float pos, posA;
-   
+
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +66,7 @@ public class GameControle : MonoBehaviour
 
         }
 
-        yield return new WaitForSeconds(0);
+        //yield return new WaitForSeconds(0);
         tempMina = Instantiate(prefabs[0], spawPosicao.position, transform.rotation);
         MinaAberta = true;
         StartCoroutine("SpawnBola");
@@ -75,11 +75,14 @@ public class GameControle : MonoBehaviour
         minaAnimator = tempMina.GetComponent<Animator>();
         minaAnimator.SetTrigger("closed");
         MinaAberta = false;
+        Destroy(tempMina, 0.65f);
 
         yield return new WaitForSeconds(intervaloSpawn);
-        Destroy(tempMina);
+
         StartCoroutine("SpawnMina");
     }
+
+
 
     IEnumerator SpawnBola()
     {
@@ -108,8 +111,8 @@ public class GameControle : MonoBehaviour
         {
             tempPicareta = Instantiate(prefabs[4], tempExplosao.transform.position, tempExplosao.transform.rotation);
             isPicareta = true;
-        }      
-    
+        }
+
     }
 
     IEnumerator SpawnEscada()
@@ -118,32 +121,33 @@ public class GameControle : MonoBehaviour
         switch (_playerControle.objetoColisao)
         {
             case "plataforma":
-                posA = -3.32f;               
+                posA = -3.32f;
                 break;
             case "plataforma1":
-                posA = -1.82f;               
+                posA = -1.82f;
                 break;
             case "plataforma2":
-                posA = -0.31f;               
+                posA = -0.31f;
                 break;
             case "plataforma3":
-                posA = 1.17f;                
+                posA = 1.17f;
                 break;
             case "plataforma4":
-                posA = 2.67f;               
+                posA = 2.67f;
                 break;
 
 
-         }
+        }
 
-      
-        {  pos = Random.Range(-6.2f,6.2f);
-           tempEscada = Instantiate(prefabs[5], new Vector2(pos, posA), transform.rotation);
+
+        {
+            pos = Random.Range(-6.2f, 6.2f);
+            tempEscada = Instantiate(prefabs[5], new Vector2(pos, posA), transform.rotation);
         }
         yield return new WaitForSeconds(5);
         minaAnimator = tempEscada.GetComponent<Animator>();
         minaAnimator.SetTrigger("Fecha");
-        Destroy(tempEscada,0.3f);
+        Destroy(tempEscada, 0.3f);
         yield return new WaitForSeconds(2);
         StartCoroutine("SpawnEscada");
     }
