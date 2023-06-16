@@ -14,10 +14,15 @@ public class playerControler : MonoBehaviour
     public Transform groundCheckR, groundCheckL;
     private bool isGround;
     public LayerMask whatIsGround;
+    private GameControle _gameControle;
+    private bool isLeft;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+        _gameControle = FindObjectOfType(typeof(GameControle)) as GameControle;
         RbPlayer = GetComponent<Rigidbody2D>();
         SrPlayer = GetComponent<SpriteRenderer>();
     }
@@ -30,18 +35,23 @@ public class playerControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");
 
+        float h = Input.GetAxis("Horizontal");
+        if (isLeft == true & h > 0)
+        {
+            flip();
+        }
+        if (isLeft == false & h < 0)
+        {
+            flip();
+        }
 
         RbPlayer.velocity = new Vector2(h * velocidade, RbPlayer.velocity.y);
-
-
 
         if (Input.GetButtonDown("Jump") && isGround == true)
         {
             RbPlayer.velocity = new Vector2(RbPlayer.velocity.x, 0);
             RbPlayer.AddForce(new Vector2(0, forcaPulo));
-
         }
     }
 
@@ -61,6 +71,10 @@ public class playerControler : MonoBehaviour
         if (col.gameObject.tag == "Picareta")
         {
             SrPlayer.sprite = Personagem[0];
+            _gameControle.isPicareta = true;
+            Destroy(_gameControle.tempPicareta);
+            StartCoroutine("TempoPicareta");
+
         }
     }
 
@@ -72,12 +86,10 @@ public class playerControler : MonoBehaviour
         if (col.gameObject.tag == "Bola")
         {
             //Destroy(this.gameObject);
-            StartCoroutine("RecarregaCena");
-
+            //StartCoroutine("RecarregaCena");
         }
 
     }
-
 
     IEnumerator RecarregaCena()
     {
@@ -85,5 +97,37 @@ public class playerControler : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
+
+
+    IEnumerator TempoPicareta()
+    {
+        yield return new WaitForSeconds(10);
+        StartCoroutine("Piscar");
+
+        yield return new WaitForSeconds(4);
+        _gameControle.isPicareta = false;
+        SrPlayer.sprite = Personagem[1];
+        StopCoroutine("Piscar");
+
+    }
+
+
+    IEnumerator Piscar()
+    {
+        yield return new WaitForSeconds(0.1f);
+        gameObject.GetComponent<SpriteRenderer>().enabled = !gameObject.GetComponent<SpriteRenderer>().enabled;
+        StartCoroutine("Piscar");
+    }
+
+    // PARA VIRAR O PERSONAGEM
+    void flip()
+    {
+        isLeft = !isLeft;
+        float x = transform.localScale.x;
+        x *= -1;
+        transform.localScale = new Vector3(x, transform.localScale.y, transform.localScale.z);
+    }
+
+
 
 }

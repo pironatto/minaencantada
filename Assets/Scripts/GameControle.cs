@@ -26,6 +26,7 @@ public class GameControle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spawPosicao = C;
         _controleBola = FindObjectOfType(typeof(ControleBola)) as ControleBola;
         _playerControle = FindObjectOfType(typeof(playerControler)) as playerControler;
         StartCoroutine("SpawnMina");
@@ -135,8 +136,6 @@ public class GameControle : MonoBehaviour
             case "plataforma4":
                 posA = 2.67f;
                 break;
-
-
         }
 
 
